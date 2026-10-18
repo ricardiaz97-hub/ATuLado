@@ -1,0 +1,519 @@
+<title>A Tu Lado</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Chakra+Petch:wght@500;600;700&family=Noto+Serif+Display:wght@500&display=swap">
+<style>
+/* Concepto: cielo estelar fijo detrás; paneles de vidrio con esquinas cortadas; el arte crema del álbum resalta como una pieza de papel sobre el espacio negro y naranja. */
+:root{
+  --acc:#FF7A1A; --acc-hi:#FFB27A; --acc-deep:#E85D04; --acc-glow:rgba(232,93,4,.6);
+  --bg:#080606; --fg:#F5EEE6; --muted:#BFB2A3; --faint:#9C8F80;
+  --glass:linear-gradient(150deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 45%,rgba(255,255,255,.07));
+  --glass-line:rgba(245,238,230,.30); --glass-hi:rgba(255,255,255,.45);
+  --ink-on-acc:#120A06; --cut:16px;
+  --f-display:"Chakra Petch","Archivo","Segoe UI",system-ui,sans-serif;
+  --f-body:"Archivo","Segoe UI",system-ui,sans-serif;
+  --f-greek:"Noto Serif Display","Times New Roman",serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+::selection{background:var(--acc);color:var(--ink-on-acc)}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--acc-hi)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc-hi);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Cielo ---------- */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(55% 35% at 85% 6%,var(--acc-glow),transparent 70%),
+    radial-gradient(60% 40% at 0% 55%,color-mix(in srgb,var(--acc) 26%,transparent),transparent 72%),
+    radial-gradient(70% 40% at 60% 105%,color-mix(in srgb,var(--acc) 18%,transparent),transparent 70%),
+    linear-gradient(180deg,#120C0A,#050404)}
+.sky .stars{position:absolute;inset:0;background-image:
+  radial-gradient(1.2px 1.2px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 28% 64%,#fff,transparent),radial-gradient(1.4px 1.4px at 46% 30%,#FFE7C2,transparent),
+  radial-gradient(1px 1px at 63% 82%,#fff,transparent),radial-gradient(1.6px 1.6px at 78% 46%,#fff,transparent),radial-gradient(1px 1px at 88% 14%,#FFE2CC,transparent),
+  radial-gradient(1px 1px at 8% 88%,#fff,transparent),radial-gradient(1.2px 1.2px at 52% 56%,#fff,transparent),radial-gradient(1px 1px at 36% 8%,#fff,transparent),
+  radial-gradient(1px 1px at 70% 22%,#fff,transparent),radial-gradient(1.3px 1.3px at 18% 42%,#fff,transparent),radial-gradient(1px 1px at 94% 70%,#fff,transparent);
+  animation:twinkle 5s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.4}}
+.sky .ring{position:absolute;width:max(130vw,900px);aspect-ratio:1;right:-55vw;top:-70vw;border-radius:50%;
+  border:1px dashed color-mix(in srgb,var(--acc) 35%,transparent);
+  box-shadow:0 0 0 28px rgba(255,255,255,.012),0 0 0 29px color-mix(in srgb,var(--acc) 14%,transparent);
+  animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sky .grain{position:absolute;inset:0;opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- Vidrio ---------- */
+.glass{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:inset 0 0 0 1px var(--glass-line),inset 0 1px 0 var(--glass-hi);
+  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+.glass.sq::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(var(--acc),var(--acc)) top left/13px 1.5px no-repeat,
+    linear-gradient(var(--acc),var(--acc)) top left/1.5px 13px no-repeat,
+    linear-gradient(var(--acc),var(--acc)) bottom right/13px 1.5px no-repeat,
+    linear-gradient(var(--acc),var(--acc)) bottom right/1.5px 13px no-repeat,
+    linear-gradient(225deg,transparent 11px,var(--glass-line) 11.5px,var(--glass-line) 12.5px,transparent 13px) top right/24px 24px no-repeat,
+    linear-gradient(45deg,transparent 11px,var(--glass-line) 11.5px,var(--glass-line) 12.5px,transparent 13px) bottom left/24px 24px no-repeat}
+@media (prefers-reduced-transparency:reduce){.glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:#17110E}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;text-decoration:none;font-family:var(--f-display);font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;font-size:.85rem;padding:14px 22px;min-height:48px;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:transform .2s cubic-bezier(.2,.8,.2,1),filter .2s}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(180deg,var(--acc-hi),var(--acc));color:var(--ink-on-acc);box-shadow:0 0 22px var(--acc-glow)}
+.btn.sec{background:var(--glass);color:var(--fg);box-shadow:inset 0 0 0 1px var(--glass-line)}
+@media (hover:hover){.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}}
+
+.eyebrow{font-family:var(--f-display);font-weight:600;font-size:.78rem;letter-spacing:.26em;text-transform:uppercase;color:var(--acc-hi);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gr{font-family:var(--f-greek);letter-spacing:.32em;font-weight:500;color:var(--muted);font-size:.78rem}
+.dia{display:inline-block;width:9px;height:9px;background:var(--acc);transform:rotate(45deg);box-shadow:0 0 10px var(--acc-glow);flex:none}
+
+main,header.top,footer{position:relative;z-index:1}
+.wrap{max-width:1180px;margin-inline:auto}
+
+/* ---------- Barra superior ---------- */
+header.top{padding-block:max(18px,env(safe-area-inset-top,0px)) 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px 0}
+.logos{display:flex;align-items:center;gap:clamp(12px,3vw,22px)}
+.logos img{height:clamp(28px,6vw,40px);width:auto}
+.logos .bar{width:1px;height:34px;background:linear-gradient(transparent,var(--acc),transparent)}
+.tag{font-family:var(--f-display);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-align:right}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(28px,6vw,64px) clamp(36px,6vw,72px);display:grid;gap:clamp(28px,5vw,56px);grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,8.4vw,5.6rem);line-height:.96;letter-spacing:.005em;margin:14px 0 18px;text-transform:uppercase;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--acc);text-shadow:0 0 28px var(--acc-glow)}
+.lead{font-size:clamp(1.05rem,2.4vw,1.28rem);color:var(--fg);max-width:34ch;margin:0 0 26px;text-wrap:pretty}
+.lead b{color:var(--acc-hi);font-weight:600}
+
+.count{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.6vw,14px);margin:0 0 22px}
+.cell{padding:clamp(12px,2.4vw,20px) 6px clamp(10px,2vw,16px);text-align:center;--cut:12px}
+.cell b{display:block;font-family:var(--f-display);font-weight:700;font-size:clamp(2.1rem,8.6vw,4.2rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--fg);letter-spacing:.02em;text-shadow:0 0 24px var(--acc-glow)}
+.cell span{display:block;margin-top:8px;font-family:var(--f-display);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc-hi)}
+.cell.s b{color:var(--acc-hi)}
+.cell.s i{position:absolute;top:9px;right:12px;width:6px;height:6px;background:var(--acc);transform:rotate(45deg);animation:pulse 1s steps(2,jump-none) infinite}
+@keyframes pulse{50%{opacity:.25}}
+.livebox{padding:22px 24px;margin:0 0 22px;font-family:var(--f-display)}
+.livebox b{display:block;font-size:clamp(1.6rem,5vw,2.4rem);text-transform:uppercase;color:var(--acc-hi);letter-spacing:.04em;line-height:1.1}
+.livebox p{margin:8px 0 0;color:var(--muted);font-family:var(--f-body)}
+
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:10px;margin:0 0 26px;justify-content:start}
+.fact{padding:12px 16px;--cut:10px;min-width:0}
+.fact small{display:block;font-family:var(--f-display);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--acc-hi)}
+.fact b{display:block;font-family:var(--f-display);font-weight:600;font-size:1.02rem;line-height:1.25;margin-top:2px}
+.fact.wide{grid-column:1/-1}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+
+.art{position:relative;justify-self:center;width:min(100%,560px)}
+.art .frame{padding:10px;--cut:22px}
+.art .frame img{width:100%;aspect-ratio:16/9;object-fit:cover;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.art .spark{position:absolute}
+.art .spark.a{width:30px;height:30px;top:-14px;left:-8px}
+.art .spark.b{width:20px;height:20px;bottom:-10px;right:18px}
+.sp{background:linear-gradient(180deg,#FFF1C9,var(--acc-hi) 45%,var(--acc));filter:drop-shadow(0 0 6px var(--acc-glow));
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+.art .sp{animation:tw 3.2s ease-in-out infinite alternate}
+.art .sp.b{animation-delay:-1.4s}
+@keyframes tw{from{transform:scale(.6) rotate(0);opacity:.6}to{transform:scale(1.1) rotate(45deg);opacity:1}}
+
+/* ---------- Qué es ---------- */
+section{padding-block:clamp(40px,7vw,88px)}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,5vw,3rem);line-height:1.05;text-transform:uppercase;margin:12px 0 0;text-wrap:balance}
+.what{padding:clamp(22px,4vw,44px);margin-top:26px;overflow:hidden}
+.stage{position:relative;min-height:clamp(120px,22vw,200px);display:flex;align-items:center}
+.eq{position:absolute;inset:auto 0 0 0;height:100%;display:flex;align-items:flex-end;gap:5px;opacity:.28;pointer-events:none}
+.eq i{flex:1;background:linear-gradient(180deg,var(--acc-hi),var(--acc-deep));height:20%;transform-origin:bottom;animation:bar 1.1s ease-in-out infinite alternate;animation-play-state:paused;clip-path:polygon(0 8px,50% 0,100% 8px,100% 100%,0 100%)}
+body.playing .eq i{animation-play-state:running}
+@keyframes bar{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.phrase{position:relative;font-family:var(--f-display);font-weight:700;text-transform:uppercase;font-size:clamp(2rem,7.2vw,4.4rem);line-height:1;letter-spacing:.01em;min-height:1.1em;text-wrap:balance}
+.phrase span{display:inline-block;animation:inw .7s cubic-bezier(.2,.8,.2,1) both}
+.phrase .old{color:var(--acc-hi)}
+@keyframes inw{from{opacity:0;transform:translateY(14px);filter:blur(8px)}}
+.steps{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(16px,3vw,40px);margin-top:26px}
+.step{padding:4px 0}
+.step h3{color:var(--acc-hi);font-family:var(--f-display);font-weight:700;font-size:1.15rem;text-transform:uppercase;letter-spacing:.04em;margin:0 0 6px}
+.step p{margin:0;color:var(--muted);font-size:.98rem}
+.chat{margin:20px 0 0;font-family:var(--f-display);font-weight:500;font-size:clamp(1.1rem,3vw,1.5rem);color:var(--acc-hi);display:flex;gap:12px;align-items:center}
+.chat .sp{width:18px;height:18px;flex:none}
+
+/* ---------- Arte ---------- */
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,20px);margin-top:26px;align-items:center}
+.gal figure{margin:0}
+.gal button{display:block;width:100%;padding:8px;border:0;background:var(--glass);cursor:zoom-in;--cut:18px;position:relative;
+  box-shadow:inset 0 0 0 1px var(--glass-line);clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.gal button img{width:100%}
+@media (hover:hover){.gal button:hover{transform:translateY(-4px)}}
+.gal figcaption{font-family:var(--f-display);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding:10px 4px 0;display:flex;gap:8px;align-items:center}
+.gal .wide{grid-column:1/-1}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(5,4,4,.92);display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb[hidden]{display:none}
+.lb img{max-height:100%;max-width:100%;object-fit:contain;box-shadow:0 30px 80px -20px #000}
+.lb button{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
+
+/* ---------- Invitación ---------- */
+.inv{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,48px);align-items:center}
+.inv .poster{padding:10px;--cut:22px}
+.inv .poster img{width:100%;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.inv p{color:var(--muted);max-width:44ch;margin:14px 0 24px}
+.inv p b{color:var(--fg);font-weight:600}
+
+/* ---------- Pie ---------- */
+footer{padding-block:34px max(120px,calc(96px + env(safe-area-inset-bottom,0px)));border-top:1px solid var(--glass-line);margin-top:20px}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+footer .logos img{height:clamp(30px,7vw,46px)}
+footer small{color:var(--muted);font-family:var(--f-display);letter-spacing:.2em;text-transform:uppercase;font-size:.7rem}
+
+/* ---------- Reproductor ---------- */
+.player{position:fixed;z-index:30;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));
+  margin-inline:auto;max-width:420px;display:flex;align-items:center;gap:12px;padding:10px 14px;--cut:14px;
+  background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(20,14,11,.7) 60%);box-shadow:inset 0 0 0 1px var(--glass-line),0 18px 50px -12px #000,0 0 30px -10px var(--acc-glow)}
+.player .play{flex:none;width:44px;height:44px;border:0;cursor:pointer;background:linear-gradient(180deg,var(--acc-hi),var(--acc));color:var(--ink-on-acc);display:grid;place-items:center;
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);box-shadow:0 0 18px var(--acc-glow);transition:transform .2s}
+.player .play:active{transform:scale(.92)}
+.gl{display:block;width:14px;height:16px;background:currentColor;clip-path:polygon(15% 0,100% 50%,15% 100%)}
+.gl.pa{clip-path:none;background:linear-gradient(90deg,currentColor 0 34%,transparent 34% 66%,currentColor 66%)}
+.gl.nxg{clip-path:none;position:relative;width:16px;height:16px;background:linear-gradient(currentColor,currentColor) right/3px 100% no-repeat}
+.gl.nxg::before{content:"";position:absolute;left:0;top:0;width:11px;height:100%;background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%)}
+.player .info{min-width:0;flex:1}
+.player .info b{display:block;font-family:var(--f-display);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--fg)}
+.player .info small{display:block;color:var(--muted);font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player canvas{width:56px;height:26px;flex:none}
+.player .nx{flex:none;width:40px;height:40px;border:0;background:transparent;cursor:pointer;color:var(--fg);display:grid;place-items:center}
+
+/* ---------- Chispas ---------- */
+.fx{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden}
+.fx .sp{position:absolute;width:16px;height:16px;left:var(--x);top:var(--y);animation:fly 1s ease-out forwards}
+.fx .dm{position:absolute;left:var(--x);top:var(--y);width:40px;height:40px;margin:-20px 0 0 -20px;border:1.5px solid var(--acc-hi);transform:rotate(45deg);animation:dm 1s ease-out forwards}
+@keyframes fly{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}80%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(90deg);opacity:0}}
+@keyframes dm{from{transform:rotate(45deg) scale(.15);opacity:1}to{transform:rotate(45deg) scale(10);opacity:0}}
+
+/* ---------- Entrada ---------- */
+.rv{transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),filter .7s}
+.rv.pre{opacity:0;transform:translateY(12px);filter:blur(6px)}
+.in{animation:enter .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*90ms)}
+@keyframes enter{from{opacity:0;transform:translateY(10px);filter:blur(6px)}}
+
+@media (max-width:860px){
+  .glass{-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%)}
+  .hero{grid-template-columns:1fr;gap:0;padding-top:18px}
+  .hero .copy{display:contents}
+  .hero .eyebrow{order:1}.hero h1{order:2;margin:10px 0 12px}.hero .lead{order:3;margin-bottom:20px}
+  #countBox,#liveBox{order:4}
+  .hero .art{order:5;margin:2px 0 26px}
+  .hero .facts{order:6}.hero .cta{order:7}
+  .inv{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tag{display:none}
+}
+@media (max-width:420px){
+  .gal{grid-template-columns:1fr}
+  .cell span{letter-spacing:.14em;font-size:.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .sky .stars,.sky .ring,.eq i,.art .sp,.cell.s i,.in,.phrase span{animation:none!important}
+  .rv{transition:none}.rv.pre{opacity:1;transform:none;filter:none}
+  html{scroll-behavior:auto}
+}
+#gl3d{position:absolute;inset:0;width:100%;height:100%;display:block}
+html.lite #gl3d{display:none}
+.cell.hit{box-shadow:inset 0 0 0 2px rgba(245,238,230,.36),inset 0 2px 0 rgba(255,255,255,.5),0 0 34px var(--acc-glow)}
+html.lite .sky .ring,html.lite .sky .grain{display:none}
+html.lite .glass,html.lite .player{-webkit-backdrop-filter:none;backdrop-filter:none}
+</style>
+
+<div class="sky" aria-hidden="true"><canvas id="gl3d"></canvas><div class="stars"></div><div class="ring"></div><div class="grain"></div></div>
+
+<header class="top">
+  <div class="wrap in" style="--i:0">
+    <div class="logos">
+      <img src="img/philly.png" alt="Philly" width="900" height="479">
+      <span class="bar" aria-hidden="true"></span>
+      <img src="img/taber.png" alt="Taber Olocuilta" width="1000" height="365">
+    </div>
+    <div class="tag" aria-hidden="true">Quien fue, quien es, quien vendrá</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div class="copy">
+        <div class="eyebrow in" style="--i:1">A Tu Lado, segundo álbum de Philly</div>
+        <h1 class="in" style="--i:2">Grabación <em>en vivo</em></h1>
+        <p class="lead in" style="--i:3">Un álbum de <b>himnos antiguos</b> en versiones modernas. <b>Todos están invitados.</b></p>
+
+        <div id="countBox" class="in" style="--i:4">
+          <div class="count" id="count" role="timer" aria-live="off">
+            <div class="cell glass sq"><b id="d">00</b><span>Días</span></div>
+            <div class="cell glass sq"><b id="h">00</b><span>Horas</span></div>
+            <div class="cell glass sq"><b id="m">00</b><span>Min</span></div>
+            <div class="cell glass sq s"><i aria-hidden="true"></i><b id="s">00</b><span>Seg</span></div>
+          </div>
+          <p class="sr" id="countSr" aria-live="polite"></p>
+        </div>
+        <div id="liveBox" class="livebox glass sq" hidden><b id="liveTxt"></b><p id="liveSub"></p></div>
+
+        <div class="facts in" style="--i:5">
+          <div class="fact glass"><small>Fecha</small><b>Sábado 7 de noviembre</b></div>
+          <div class="fact glass"><small>Hora</small><b>5:00 PM</b></div>
+          <div class="fact glass wide"><small>Lugar</small><b>Tabernáculo Bíblico Bautista, Taber Olocuilta</b></div>
+        </div>
+
+        <div class="cta in" style="--i:6">
+          <a class="btn pri" id="calBtn" target="_blank" rel="noopener" href="#">Agregar al calendario</a>
+          <a class="btn sec" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tabern%C3%A1culo+B%C3%ADblico+Bautista+Olocuilta">Ver en el mapa</a>
+        </div>
+      </div>
+
+      <div class="art in" style="--i:3">
+        <div class="frame glass sq"><img src="img/arte.webp" alt="Arte de A Tu Lado: guitarra, himnario, estuche de batería y micrófono sobre un globo naranja" width="1672" height="941" fetchpriority="high"></div>
+        <i class="spark sp a" aria-hidden="true"></i><i class="spark sp b" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+
+  <section id="que">
+    <div class="wrap">
+      <div class="rv">
+        <h2>Los himnos de siempre, como nunca los habías oído</h2>
+      </div>
+      <div class="what glass sq rv">
+        <div class="stage">
+          <div class="eq" id="eq" aria-hidden="true"></div>
+          <div class="phrase" id="phrase" aria-live="off">Himnos antiguos.</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step rv">
+          <h3>Himnos antiguos</h3><p>Los que se han cantado por generaciones. Los que ya te sabes de memoria.</p>
+        </div>
+        <div class="step rv">
+          <h3>Versiones modernas</h3><p>Los mismos himnos con el sonido de hoy. Segundo álbum de Philly.</p>
+        </div>
+        <div class="step rv">
+          <h3>Grabado en vivo</h3><p>Se graba con la iglesia presente. Tu voz es parte del momento.</p>
+        </div>
+      </div>
+      <p class="chat rv"><i class="sp" aria-hidden="true"></i>No te preocupes, ya te sabes todas las letras.</p>
+    </div>
+  </section>
+
+  <section id="arte">
+    <div class="wrap">
+      <div class="rv">
+        <div class="eyebrow">El arte <span class="gr" aria-hidden="true">ΕΙΡΗΝΗ ΥΜΙΝ</span></div>
+        <h2>Philly saca su segundo álbum</h2>
+      </div>
+      <div class="gal">
+        <figure class="wide rv"><button type="button" data-lb="img/periodico.webp" data-alt="Periódico: Philly saca segundo álbum"><img src="img/periodico.webp" alt="Portada de periódico: Philly saca segundo álbum" width="1672" height="941" loading="lazy"></button><figcaption>La noticia</figcaption></figure>
+        <figure class="rv"><button type="button" data-lb="img/portada.webp" data-alt="Portada del álbum A Tu Lado"><img src="img/portada.webp" alt="Portada del álbum A Tu Lado" width="1254" height="1254" loading="lazy"></button><figcaption>Portada</figcaption></figure>
+        <figure class="rv"><button type="button" data-lb="img/poster-vertical.webp" data-alt="Cartel vertical: A Tu Lado, grabación en vivo, 7 de noviembre, 5:00 PM"><img src="img/poster-vertical.webp" alt="Cartel vertical: A Tu Lado, grabación en vivo, 7 de noviembre, 5:00 PM" width="941" height="1672" loading="lazy" style="max-height:640px;width:auto;margin-inline:auto"></button><figcaption>Cartel</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="invitacion">
+    <div class="wrap inv">
+      <div class="poster glass sq rv"><img src="img/poster-horizontal.webp" alt="Invitación: A Tu Lado, grabación en vivo, 7 de noviembre, 5:00 PM, Tabernáculo Bíblico Bautista" width="1672" height="941" loading="lazy"></div>
+      <div class="rv">
+        <h2>Todos están invitados</h2>
+        <p><b>Sábado 7 de noviembre, 5:00 PM.</b> Ven con tu familia, tus amigos y tu voz. Pasa la invitación a quien quieras que esté <i>a tu lado</i>.</p>
+        <div class="cta">
+          <a class="btn pri" id="wa" target="_blank" rel="noopener" href="#">Invitar por WhatsApp</a>
+        </div>
+              </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logos"><img src="img/philly.png" alt="Philly" width="900" height="479"><span class="bar" aria-hidden="true"></span><img src="img/taber.png" alt="Taber Olocuilta" width="1000" height="365"></div>
+    <small>Tabernáculo Bíblico Bautista</small>
+    <span class="gr" aria-hidden="true">ΥΜΝΟΙ · ΛΑΤΡΕΙΑ</span>
+  </div>
+</footer>
+
+<div class="player glass" id="player">
+  <button class="play" id="pp" type="button" aria-label="Escuchar un adelanto"><span class="gl" id="ico" aria-hidden="true"></span></button>
+  <div class="info"><b>Escucha un adelanto</b><small id="pst">Música de Philly</small></div>
+  <canvas id="viz" width="112" height="52" aria-hidden="true"></canvas>
+  <button class="nx" id="nx" type="button" aria-label="Siguiente adelanto"><span class="gl nxg" aria-hidden="true"></span></button>
+</div>
+
+<div class="fx" id="fx" aria-hidden="true"></div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Imagen ampliada"><img id="lbi" alt=""><button class="btn sec" id="lbx" type="button">Cerrar</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var TARGET=new Date('2026-11-07T17:00:00-06:00').getTime();   // 5:00 PM hora de El Salvador
+  var LIVE_END=TARGET+4*3600e3;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(id){return document.getElementById(id)};
+  var pad=function(n){return n<10?'0'+n:''+n};
+
+  /* modo ligero */
+  try{ if((navigator.deviceMemory&&navigator.deviceMemory<=3)||(navigator.connection&&navigator.connection.saveData)) document.documentElement.classList.add('lite'); }catch(e){}
+
+  /* ---- cuenta regresiva ---- */
+  var lastMin=-1;
+  function tick(){
+    var now=Date.now(), diff=TARGET-now;
+    if(diff>0){
+      var s=Math.floor(diff/1000), d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), sc=s%60;
+      $('d').textContent=pad(d);$('h').textContent=pad(h);$('m').textContent=pad(m);$('s').textContent=pad(sc);
+      if(m!==lastMin){lastMin=m;$('countSr').textContent='Faltan '+d+' días, '+h+' horas y '+m+' minutos para A Tu Lado.';}
+    }else{
+      $('countBox').hidden=true;$('liveBox').hidden=false;
+      if(now<LIVE_END){$('liveTxt').textContent='Hoy es el día. Estamos en vivo.';$('liveSub').textContent='Tabernáculo Bíblico Bautista, Olocuilta.';}
+      else{$('liveTxt').textContent='Gracias por estar a tu lado.';$('liveSub').textContent='Pronto compartiremos el álbum.';}
+    }
+  }
+  tick();setInterval(tick,1000);
+
+  /* ---- calendario y compartir ---- */
+  var title='A Tu Lado, grabación en vivo de Philly';
+  var where='Tabernáculo Bíblico Bautista, Olocuilta, El Salvador';
+  var cal='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+
+    '&dates=20261107T230000Z/20261108T020000Z&location='+encodeURIComponent(where)+
+    '&details='+encodeURIComponent('Grabación en vivo del segundo álbum de Philly: himnos antiguos en versiones modernas. Todos están invitados.');
+  $('calBtn').href=cal;
+  var pageUrl='';try{var h=location.href;if(/^https?:/.test(h))pageUrl=h;}catch(e){}
+  var msg='Estás invitado a A Tu Lado, grabación en vivo del segundo álbum de Philly: himnos antiguos en versiones modernas. Sábado 7 de noviembre, 5:00 PM, Tabernáculo Bíblico Bautista, Olocuilta.'+(pageUrl?' '+pageUrl:'');
+  $('wa').href='https://wa.me/?text='+encodeURIComponent(msg);
+  $('wa').addEventListener('click',function(){burst(this);});
+
+  /* ---- ecualizador decorativo ---- */
+  var eq=$('eq');
+  for(var i=0;i<28;i++){var b=document.createElement('i');b.style.animationDelay=(-Math.random()*1.1).toFixed(2)+'s';b.style.animationDuration=(0.7+Math.random()*0.9).toFixed(2)+'s';eq.appendChild(b);}
+
+  /* ---- frases que explican el evento ---- */
+  var ph=['Himnos antiguos.','Versiones modernas.','Grabados en vivo.','Contigo.'];
+  var pe=$('phrase');
+  function show(i){pe.innerHTML='';var sp=document.createElement('span');sp.textContent=ph[i];if(i===0)sp.className='old';pe.appendChild(sp);}
+  if(reduce){pe.textContent='Himnos antiguos. Versiones modernas. Grabados en vivo.';}
+  else{var k=0;show(0);setInterval(function(){k=(k+1)%ph.length;show(k);},2600);}
+
+  /* ---- entrada al hacer scroll (visible si falla el script) ---- */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}});},{threshold:.12});
+    rv.forEach(function(el){var r=el.getBoundingClientRect();if(r.top>innerHeight){el.classList.add('pre');io.observe(el);}});
+  }
+
+  /* ---- chispas ---- */
+  function burst(el){
+    if(reduce)return;
+    var fx=$('fx'),r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+    for(var i=0;i<2;i++){var d=document.createElement('div');d.className='dm';d.style.setProperty('--x',x+'px');d.style.setProperty('--y',y+'px');d.style.animationDelay=(i*.18)+'s';fx.appendChild(d);setTimeout(function(n){n.remove()},1300,d);}
+    for(var j=0;j<12;j++){var a=Math.PI*2*j/12+Math.random()*.4,dist=70+Math.random()*90,s=document.createElement('i');s.className='sp';
+      s.style.setProperty('--x',x+'px');s.style.setProperty('--y',y+'px');s.style.setProperty('--dx',Math.cos(a)*dist+'px');s.style.setProperty('--dy',Math.sin(a)*dist+'px');fx.appendChild(s);setTimeout(function(n){n.remove()},1100,s);}
+  }
+
+
+  /* ---- v2: pulso 138 BPM (mismo tempo del video), GSAP + three.js ---- */
+  var BEAT=60/138, beatE=0, lastBeat=-1;
+  var lite=function(){return document.documentElement.classList.contains('lite')};
+  if(window.gsap&&!reduce){
+    var cells=[].slice.call(document.querySelectorAll('.cell'));
+    gsap.from('.cell',{y:60,scale:.6,opacity:0,rotationX:-70,transformPerspective:600,duration:.7,ease:'back.out(1.8)',stagger:.09,delay:.45});
+    gsap.from('h1 em',{scale:1.5,opacity:0,filter:'blur(14px)',duration:.6,ease:'expo.out',delay:.35});
+    gsap.from('.facts .fact',{x:-40,opacity:0,duration:.5,ease:'expo.out',stagger:.08,delay:.9});
+    var sb=$('s');
+    var lastSec=-1;
+    gsap.ticker.add(function(time){
+      var ph=(time%BEAT)/BEAT, bi=Math.floor(time/BEAT);
+      beatE=Math.pow(1-ph,3);
+      if(bi!==lastBeat){lastBeat=bi;
+        if(bi%4===0){gsap.fromTo('#count',{scale:1.035},{scale:1,duration:.4,ease:'power3.out',overwrite:true});}
+        var c=cells[bi%4];if(c){c.classList.add('hit');setTimeout(function(n){n.classList.remove('hit')},170,c);}
+      }
+    });
+    var os=tick;
+    setInterval(function(){var v=sb.textContent;if(v!==lastSec){lastSec=v;gsap.fromTo(sb,{scale:1.35,y:-6},{scale:1,y:0,duration:.45,ease:'elastic.out(1,.45)',overwrite:true});}},250);
+  }
+  if(window.THREE&&!reduce&&!lite()){try{
+    var cvs=$('gl3d'),ren=new THREE.WebGLRenderer({canvas:cvs,alpha:true,antialias:false,powerPreference:'low-power'});
+    ren.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
+    var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,200);cam.position.z=18;
+    var N=900,pos=new Float32Array(N*3);
+    for(var i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*90;pos[i*3+1]=(Math.random()-.5)*90;pos[i*3+2]=(Math.random()-.5)*70-10}
+    var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xFFB27A,size:.18,transparent:true,opacity:.85}));sc.add(pts);
+    var grp=new THREE.Group();sc.add(grp);
+    var mats=[0xFF7A1A,0xFFB27A,0xE85D04],gems=[];
+    for(var g=0;g<7;g++){
+      var m=new THREE.Mesh(new THREE.OctahedronGeometry(1+Math.random()*1.2),new THREE.MeshBasicMaterial({color:mats[g%3],wireframe:true,transparent:true,opacity:.55}));
+      var a=g/7*Math.PI*2;m.position.set(Math.cos(a)*11,Math.sin(a*1.7)*9,-6-Math.random()*8);m.userData.s=.2+Math.random()*.5;grp.add(m);gems.push(m);}
+    var tor=new THREE.Mesh(new THREE.TorusGeometry(7,.04,8,120),new THREE.MeshBasicMaterial({color:0xFF7A1A,transparent:true,opacity:.6}));tor.position.z=-12;sc.add(tor);
+    var tor2=tor.clone();tor2.scale.setScalar(1.6);tor2.material=tor.material.clone();tor2.material.opacity=.3;sc.add(tor2);
+    function rs(){var w=innerWidth,h=innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+    rs();addEventListener('resize',rs);
+    var mx=0,my=0;addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+    addEventListener('deviceorientation',function(e){if(e.gamma!=null){mx=Math.max(-.5,Math.min(.5,e.gamma/60));my=Math.max(-.5,Math.min(.5,(e.beta-45)/90))}},{passive:true});
+    var vis=true;document.addEventListener('visibilitychange',function(){vis=!document.hidden});
+    var t0=performance.now();
+    (function loop(){requestAnimationFrame(loop);if(!vis||lite())return;
+      var t=(performance.now()-t0)/1000, e=beatE;
+      if(an&&drawing){an.getByteFrequencyData(data);e=Math.max(e*.4,(data[1]+data[2]+data[3])/765)}
+      pts.rotation.y=t*.02+mx*.2;pts.rotation.x=my*.15;
+      pts.material.size=.16+e*.22;
+      gems.forEach(function(m,i){m.rotation.x+=.004*(1+e*8);m.rotation.y+=.006*(1+e*8)*m.userData.s*3;m.scale.setScalar(1+e*.35)});
+      tor.rotation.x=t*.2;tor.rotation.y=t*.15;tor.scale.setScalar(1+e*.15);tor2.rotation.x=-t*.12;tor2.rotation.z=t*.2;
+      grp.rotation.z=t*.04;cam.position.x=mx*3;cam.position.y=-my*2;cam.lookAt(0,0,-5);
+      ren.render(sc,cam);})();
+  }catch(err){}}
+
+  /* ---- visor de imágenes ---- */
+  var lb=$('lb');
+  document.querySelectorAll('[data-lb]').forEach(function(b){b.addEventListener('click',function(){$('lbi').src=b.dataset.lb;$('lbi').alt=b.dataset.alt||'';lb.hidden=false;$('lbx').focus();});});
+  function closeLb(){lb.hidden=true;}
+  $('lbx').addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+
+  /* ---- reproductor de adelantos (sin títulos) ---- */
+  var files=[1,2,3,4,5,6,7,8].map(function(n){return 'audio/a'+n+'.mp3'});
+  for(var q=files.length-1;q>0;q--){var z=Math.floor(Math.random()*(q+1)),t=files[q];files[q]=files[z];files[z]=t;}
+  var idx=0,au=new Audio(),actx,an,data,drawing=false,cv=$('viz'),cx=cv.getContext('2d');
+  au.preload='none';au.src=files[0];au.volume=.9;
+  var ico=$('ico');
+  function setIco(p){ico.className='gl'+(p?' pa':'');$('pp').setAttribute('aria-label',p?'Pausar adelanto':'Escuchar un adelanto');}
+  function setupAn(){
+    if(actx)return;
+    try{var AC=window.AudioContext||window.webkitAudioContext;actx=new AC();var src=actx.createMediaElementSource(au);an=actx.createAnalyser();an.fftSize=64;src.connect(an);an.connect(actx.destination);data=new Uint8Array(an.frequencyBinCount);}catch(e){actx=null;an=null;}
+  }
+  function draw(){
+    if(!drawing)return;
+    cx.clearRect(0,0,cv.width,cv.height);
+    var n=8,w=cv.width/n;
+    for(var i=0;i<n;i++){
+      var v=an?data[i+1]/255:Math.random()*.7;
+      var hh=Math.max(4,v*cv.height);
+      cx.fillStyle=i%2?'#FFB27A':'#FF7A1A';cx.fillRect(i*w+2,cv.height-hh,w-6,hh);
+    }
+    if(an)an.getByteFrequencyData(data);
+    requestAnimationFrame(draw);
+  }
+  function play(){
+    setupAn();if(actx&&actx.state==='suspended')actx.resume();
+    var p=au.play();if(p&&p.catch)p.catch(function(){setIco(false);});
+  }
+  au.addEventListener('play',function(){document.body.classList.add('playing');setIco(true);drawing=true;if(!reduce)draw();$('pst').textContent='Sonando ahora';});
+  au.addEventListener('pause',function(){document.body.classList.remove('playing');setIco(false);drawing=false;$('pst').textContent='Música de Philly';});
+  au.addEventListener('ended',next);
+  function next(){idx=(idx+1)%files.length;au.src=files[idx];play();}
+  $('pp').addEventListener('click',function(){if(au.paused){play();burst(this);}else au.pause();});
+  $('nx').addEventListener('click',next);
+})();
+</script>
